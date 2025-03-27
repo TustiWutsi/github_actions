@@ -1,0 +1,11 @@
+FROM python:3.10
+
+# Upgrade pip and install dependencies
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests==2.32.3
+
+# Copy test script
+ADD test_authentication.py /test/test_authentication.py
+WORKDIR /test/
+
+# Run the test script
+CMD ["python3", "test_authentication.py"]
