@@ -2,7 +2,7 @@ import os
 import requests
 
 # définition de l'adresse de l'API
-api_address = 'localhost'
+api_address = 'fastapi-api'
 # port de l'API
 api_port = 8000
 
@@ -49,9 +49,10 @@ for username, password in user_credentials.items():
         test_status = 'SUCCESS'
     else:
         test_status = 'FAILURE'
-    print(output.format(username_=username, password_=password, status_code=status_code, test_status=test_status))
+    output_formatted = output.format(username_=username, password_=password, status_code=status_code, test_status=test_status)
+    print(output_formatted)
 
     # impression dans un fichier
-    if os.environ.get('LOG') == 1:
-        with open('api_test.log', 'a') as file:
-            file.write(output)
+    if os.environ.get('LOG') == "1":
+        with open('/home/test/logs/api_test.log', 'a') as file:
+            file.write(output_formatted)

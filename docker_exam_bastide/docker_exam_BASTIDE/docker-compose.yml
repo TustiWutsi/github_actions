@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  fastapi-api:
+    image: datascientest/fastapi:1.0.0
+    container_name: fastapi-api
+    ports:
+      - "8000:8000"
+    networks:
+      - fastapi-net
+
+  test_authent:
+    #build:
+    #  context: ./path/to/test_authent
+    image: test_authent
+    container_name: test_authentification
+    environment:
+      - LOG=1
+    volumes:
+      - my_volume:/home/test/logs
+    networks:
+      - fastapi-net
+    depends_on:
+      - fastapi-api
+
+  test_sentiment:
+    #build:
+    #  context: ./path/to/test_sentiment
+    image: test_author
+    container_name: test_sentiment
+    environment:
+      - LOG=1
+    volumes:
+      - my_volume:/home/test/logs
+    networks:
+      - fastapi-net
+    depends_on:
+      - fastapi-api
+
+networks:
+  fastapi-net:
+    external: true
+
+volumes:
+  my_volume:
+    external: true
