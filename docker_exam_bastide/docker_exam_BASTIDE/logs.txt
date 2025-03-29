@@ -1,0 +1,163 @@
+
+    ============================
+        Authentication test
+    ============================
+
+    request done at "/permissions"
+    | username=alice
+    | password=wonderland
+
+    Expected result = 200; 
+    actual restult = 200
+
+    ==>  SUCCESS
+
+    
+    ============================
+        Authentication test
+    ============================
+
+    request done at "/permissions"
+    | username=bob
+    | password=builder
+
+    Expected result = 200; 
+    actual restult = 200
+
+    ==>  SUCCESS
+
+    
+    ============================
+        Authentication test
+    ============================
+
+    request done at "/permissions"
+    | username=clementine
+    | password=mandarine
+
+    Expected result = 200; 
+    actual restult = 403
+
+    ==>  FAILURE
+
+    
+        ============================
+            Authorization test
+        ============================
+
+        request done at "/v1/sentiment"
+        | username=alice
+        | password=wonderland
+
+        Expected result = 200; 
+        actual restult = 200
+
+        ==>  SUCCESS
+        ==>  {"username":"alice","version":"v1","sentence":"hello%20world","score":0.0}
+
+        
+        ============================
+            Authorization test
+        ============================
+
+        request done at "/v2/sentiment"
+        | username=alice
+        | password=wonderland
+
+        Expected result = 200; 
+        actual restult = 200
+
+        ==>  SUCCESS
+        ==>  {"username":"alice","version":"v2","sentence":"hello%20world","score":0.0}
+
+        
+        ============================
+            Authorization test
+        ============================
+
+        request done at "/v1/sentiment"
+        | username=bob
+        | password=builder
+
+        Expected result = 200; 
+        actual restult = 200
+
+        ==>  SUCCESS
+        ==>  {"username":"bob","version":"v1","sentence":"hello%20world","score":0.0}
+
+        
+        ============================
+            Authorization test
+        ============================
+
+        request done at "/v2/sentiment"
+        | username=bob
+        | password=builder
+
+        Expected result = 200; 
+        actual restult = 403
+
+        ==>  FAILURE
+        ==>  {"detail":"This service is not included in your plan."}
+
+        
+        ============================
+            Content test
+        ============================
+
+        request done at "/v1/sentiment"
+        | username='alice'
+        | password='wonderland'
+        | sentence=life is beautiful
+
+        Expected result : positive score; 
+        actual restult = 0.5994
+
+        ==>  SUCCESS
+
+        
+        ============================
+            Content test
+        ============================
+
+        request done at "/v2/sentiment"
+        | username='alice'
+        | password='wonderland'
+        | sentence=life is beautiful
+
+        Expected result : positive score; 
+        actual restult = 0.5994
+
+        ==>  SUCCESS
+
+        
+        ============================
+            Content test
+        ============================
+
+        request done at "/v1/sentiment"
+        | username='alice'
+        | password='wonderland'
+        | sentence=that sucks
+
+        Expected result : negative score; 
+        actual restult = -0.3612
+
+        ==>  SUCCESS
+
+        
+        ============================
+            Content test
+        ============================
+
+        request done at "/v2/sentiment"
+        | username='alice'
+        | password='wonderland'
+        | sentence=that sucks
+
+        Expected result : negative score; 
+        actual restult = -0.3612
+
+        ==>  SUCCESS
+
+        

@@ -10,8 +10,6 @@ services:
       - fastapi-net
 
   test_authent:
-    #build:
-    #  context: ./path/to/test_authent
     image: test_authent
     container_name: test_authentification
     environment:
@@ -23,11 +21,9 @@ services:
     depends_on:
       - fastapi-api
 
-  test_sentiment:
-    #build:
-    #  context: ./path/to/test_sentiment
+  test_author:
     image: test_author
-    container_name: test_sentiment
+    container_name: test_authorization
     environment:
       - LOG=1
     volumes:
@@ -35,7 +31,19 @@ services:
     networks:
       - fastapi-net
     depends_on:
-      - fastapi-api
+      - test_authent
+
+  test_content:
+    image: test_content
+    container_name: test_sentiment_score
+    environment:
+      - LOG=1
+    volumes:
+      - my_volume:/home/test/logs
+    networks:
+      - fastapi-net
+    depends_on:
+      - test_author
 
 networks:
   fastapi-net:
